@@ -1,8 +1,12 @@
 import 'package:lofi_music/constants/exports.dart';
+import 'package:device_preview/device_preview.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(DevicePreview(
+    enabled: true,
+    tools: const [
+      ...DevicePreview.defaultTools,
+    ],
+    builder: (context) => MyApp()));
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -15,9 +19,11 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp(
-            title: 'Flutter Demo',
-            debugShowCheckedModeBanner: false,
+            useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
+            builder: DevicePreview.appBuilder,
             theme: ThemeConfig().themeData,
+            debugShowCheckedModeBanner: false,
             home: HomePage(),
           );
         });
