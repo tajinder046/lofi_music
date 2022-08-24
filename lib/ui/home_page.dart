@@ -8,13 +8,68 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const UserAccountsDrawerHeader(
+              // <-- SEE HERE
+              decoration: BoxDecoration(color: const Color(0xff764abc)),
+              accountName: Text(
+                "Pinkesh Darji",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              accountEmail: Text(
+                "pinkesh.earth@gmail.com",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              currentAccountPicture: FlutterLogo(),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.home,
+              ),
+              title: const Text('Page 1'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.train,
+              ),
+              title: const Text('Page 2'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       appBar: commonAppbar(
           leadingWidget: Padding(
             padding: EdgeInsets.only(left: margin_30),
-            child: assetImage(img: icMenu),
+            child: InkWell(
+                focusColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                onTap: () {
+                  setState(() {
+                    _scaffoldKey.currentState?.openDrawer();
+                  });
+                },
+                child: assetImage(img: icMenu)),
           ),
           txt: '',
           action: Padding(
@@ -35,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                     fontweight: FontWeight.bold),
               ),
             ),
-            vGap(height: height_10),
+            //vGap(height: height_10),
             Container(
               height: height_270,
               child: ListView.separated(
@@ -66,7 +121,6 @@ class _HomePageState extends State<HomePage> {
   _musicList() {
     return Container(
       width: width_180,
-      padding: EdgeInsets.all(margin_8),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -78,7 +132,12 @@ class _HomePageState extends State<HomePage> {
               overflow: Overflow.visible,
               children: [
                 oneSidedShadow(),
-                assetImage(img: imgSong, fit: BoxFit.cover, radius: radius_10),
+                Container(
+                  height: height_150,
+                  width: width_150,
+                  child: assetImage(
+                      img: imgSong, fit: BoxFit.cover, radius: radius_10),
+                ),
               ],
             ),
           ),

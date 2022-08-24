@@ -14,6 +14,7 @@ double height_70 = 70.0.h;
 double height_80 = 80.0.h;
 double height_90 = 90.0.h;
 double height_100 = 100.0.h;
+double height_150 = 150.0.h;
 double height_200 = 200.0.h;
 double height_250 = 250.0.h;
 double height_270 = 270.0.h;
@@ -44,6 +45,7 @@ double width_20 = 20.0.w;
 double width_50 = 50.0.w;
 double width_90 = 90.0.w;
 double width_100 = 100.0.w;
+double width_150 = 150.0.w;
 double width_180 = 180.0.w;
 double width_200 = 200.0.w;
 
